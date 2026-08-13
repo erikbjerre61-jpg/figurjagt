@@ -126,12 +126,20 @@
       sctx.rect(cx - size, cy - size * 0.58, size * 2, size * 1.16);
 
     } else if (currentShape === 'triangle') {
-      // Standard trekant – 30% højere, med stump (afskåret) top i stedet for spids
-      const topHalfWidth = size * 0.28;
-      sctx.moveTo(cx - topHalfWidth, cy - size * 1.3);
-      sctx.lineTo(cx + topHalfWidth, cy - size * 1.3);
-      sctx.lineTo(cx + size * 0.866, cy + size * 0.5);
-      sctx.lineTo(cx - size * 0.866, cy + size * 0.5);
+      // Stump trekant: grundvinkler ca. 40°, topvinkel ca. 100° (afskåret top)
+      const baseAngleRad = 40 * Math.PI / 180;
+      const halfBase = size * 0.866;
+      const fullHeight = halfBase * Math.tan(baseAngleRad); // højden hvis trekanten havde haft en spids top
+      const baseY = cy + size * 0.5;
+      const apexY = baseY - fullHeight;
+      const topCutFraction = 0.12; // hvor meget af toppen der skæres af (0 = helt spids, højere værdi = mere stump)
+      const topY = apexY + topCutFraction * fullHeight;
+      const topHalfWidth = halfBase * topCutFraction;
+
+      sctx.moveTo(cx - topHalfWidth, topY);
+      sctx.lineTo(cx + topHalfWidth, topY);
+      sctx.lineTo(cx + halfBase, baseY);
+      sctx.lineTo(cx - halfBase, baseY);
       sctx.closePath();
 
     } else if (currentShape === 'isotriangle') {
