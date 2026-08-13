@@ -126,8 +126,10 @@
       sctx.rect(cx - size, cy - size * 0.58, size * 2, size * 1.16);
 
     } else if (currentShape === 'triangle') {
-      // Standard trekant – 30% højere
-      sctx.moveTo(cx, cy - size * 1.3);
+      // Standard trekant – 30% højere, med stump (afskåret) top i stedet for spids
+      const topHalfWidth = size * 0.28;
+      sctx.moveTo(cx - topHalfWidth, cy - size * 1.3);
+      sctx.lineTo(cx + topHalfWidth, cy - size * 1.3);
       sctx.lineTo(cx + size * 0.866, cy + size * 0.5);
       sctx.lineTo(cx - size * 0.866, cy + size * 0.5);
       sctx.closePath();
