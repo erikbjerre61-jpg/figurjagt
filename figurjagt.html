@@ -132,7 +132,7 @@
       const fullHeight = halfBase * Math.tan(baseAngleRad); // højden hvis trekanten havde haft en spids top
       const baseY = cy + size * 0.5;
       const apexY = baseY - fullHeight;
-      const topCutFraction = 0.12; // hvor meget af toppen der skæres af (0 = helt spids, højere værdi = mere stump)
+      const topCutFraction = 0; // hvor meget af toppen der skæres af (0 = helt spids, højere værdi = mere stump)
       const topY = apexY + topCutFraction * fullHeight;
       const topHalfWidth = halfBase * topCutFraction;
 
